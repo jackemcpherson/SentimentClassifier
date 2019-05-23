@@ -25,7 +25,7 @@ print(nltk.__version__)
 #Data Cleanse and Shuffle#
 
 train = pd.read_csv("training.txt", sep="\t", header=None)
-train = train.sample(frac=1,random_state=1991)
+train = train.sample(frac=1,random_state=int(input("Random State? " )))
 train.columns = ["Sentiment","Raw_Text"]
 train_data = list(zip(train["Raw_Text"],train["Sentiment"]))
 
@@ -40,5 +40,5 @@ train["Guess"] = train["Raw_Text"].apply(cl.classify)
 #Results#
 
 Accuracy = round((train[train["Sentiment"] == train["Guess"]].size/train.size)*100, 2)
-print(f"\nAccuracy: {accuracy}%\n")
+print(f"\nAccuracy: {Accuracy}%\n")
 print(cl.show_informative_features())
